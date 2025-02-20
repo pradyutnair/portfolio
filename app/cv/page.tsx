@@ -112,9 +112,12 @@ export default function CVPage() {
                   
                 </div>
                 <ul className="list-disc list-outside pl-5 text-gray-300 space-y-1">
-                  <li>Developed and maintained data pipelines for real-time analytics</li>
-                  <li>Implemented machine learning models for predictive analysis</li>
-                  <li>Collaborated with cross-functional teams to improve data infrastructure</li>
+                <li>Responsible for metric standardisation, analytics, and reporting for TomTom’s Horizon team.</li>
+                <li>Enhanced product health tracking by standardizing metrics across 5+ workflows.</li>
+                <li>Strengthened existing metrics for improved reliability and developed new metrics to track Horizon
+                Engine result availability and connection failure rates.</li>
+                <li>Built 5 real-time dashboards for product, engineering, and senior managers, providing an overview of
+                the Horizon team’s performance and key metrics.</li>
                 </ul>
               </div>
               <div className="space-y-4">
@@ -138,6 +141,7 @@ export default function CVPage() {
                   
                 </div>
                 <ul className="list-disc list-outside pl-5 text-gray-300 space-y-2">
+                <li> Part of the Tesla Residential Energy team at Amsterdam, responsible for data analytics and reporting. </li>
                 <li> Built automated SQL pipelines, cutting manual reporting by 85% and generating insights for 20+ product/customer reports. </li>
                 <li> Created discrepancy reports, increasing sales team efficiency by 12 hours weekly and improving order tracking accuracy by 35%. </li>
                 <li> Developed Python and PowerBI dashboards for installation issues and fleet metrics, enhancing product performance tracking across 3 regions. </li>
