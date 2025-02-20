@@ -23,7 +23,7 @@ export function ProfileSection() {
       <Link href="/cv">
         <Button 
           variant="outline" 
-          className="mt-10 bg-gray-800 text-white rounded-full hover:opacity-90 transition-opacity"
+          className="mt-10 bg-gray-800 text-white rounded-full transition-opacity"
         >
           View My CV
         </Button>
