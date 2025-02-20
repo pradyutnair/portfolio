@@ -1,11 +1,16 @@
 import Link from "next/link"
 import Image from "next/image"
-import { getSerializedProjectContent } from "@/lib/mdx"
+import { getSerializedProjectContent, getAllProjects } from "@/lib/mdx"
 import { notFound } from "next/navigation"
 import { ProjectActions } from "@/components/project-actions"
 import { MDXContent } from "@/components/mdx-content"
 import { TableOfContents } from "@/components/mdx/toc"
 
+// This function returns all the dynamic route params for static export.
+export async function generateStaticParams() {
+  const projects = await getAllProjects()
+  return projects.map((project) => ({ id: project.id }))
+}
 
 export default async function ProjectPage({ params }: { params: { id: string } }) {
   const projectData = await getSerializedProjectContent(params.id)
@@ -74,4 +79,3 @@ export default async function ProjectPage({ params }: { params: { id: string } }
     </div>
   )
 }
-
