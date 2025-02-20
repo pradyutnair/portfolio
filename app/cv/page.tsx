@@ -211,7 +211,7 @@ export default function CVPage() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-2">Einhoeden University of Technology</h3>
+                <h3 className="text-lg font-semibold mb-2">Eindhoven University of Technology</h3>
                 <ul className="text-gray-300 space-y-1">
                   <li>Advanced Mathematics </li>
                   <li>Business Analytics</li>

@@ -9,8 +9,12 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'portfolio',
+  title: 'Pradyut Nair - Portfolio',
   description: 'Full-stack developer and AI enthusiast',
+  icons: {
+    icon: '/prad-icon.ico',
+    apple: '/prad-icon.ico',
+  },
 }
 
 export default function RootLayout({
