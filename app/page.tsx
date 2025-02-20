@@ -4,6 +4,7 @@ import { TechStack } from "@/components/tech-stack"
 import { ProfileSection } from "@/components/profile-section"
 import { ContactButton } from "@/components/contact-button"
 import { SocialLinks } from "@/components/social-links"
+import GitHubCommitHistory from "@/components/github-calendar"
 
 export default async function Portfolio() {
   const projects = await getAllProjects();
@@ -14,6 +15,9 @@ export default async function Portfolio() {
         <ProfileSection />
         <ProjectsGrid projects={projects} />
         <TechStack />
+        <div className="py-8">
+          <GitHubCommitHistory usernames={['pradyutnair']} />
+        </div>
         <ContactButton />
         <SocialLinks />
       </div>

@@ -9,7 +9,7 @@ import { VscAzure } from "react-icons/vsc"
 export function TechStack() {
   return (
     <section className="bg-black rounded-xl p-6 overflow-hidden relative">
-      <h2 className="text-2xl font-mono mb-4 text-center text-white">My Stack</h2>
+      <h2 className="text-2xl font-mono mb-4 text-center text-white">My Tech Stack</h2>
       <div className="relative">
         {/* Fade Effect Left */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black via-black to-transparent z-20 pointer-events-none" />

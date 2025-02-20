@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 export function ProfileSection() {
   return (
     <div className="text-center space-y-6">
-      <Image src="/placeholder.svg" alt="Profile" width={120} height={120} className="rounded-full mx-auto" />
+      <Image src="/prad-icon.jpg" alt="Profile" width={120} height={120} className="rounded-full mx-auto" />
       <div>
         <h1 className="text-4xl font-mono">Pradyut Nair</h1>
         <p className="text-gray-400 text-xl mt-2">(Future) AI Engineer</p>
@@ -20,13 +20,14 @@ export function ProfileSection() {
         as a Data Analyst. My research interests lie in Deep Learning, Natural Language Processing, and wizardry🧙. Currently exploring the boundaries of
         curiosity.
       </p>
-      <Button 
-        variant="outline" 
-        className="rounded-full text-black"
-        onClick={() => window.location.href = "#about"}
-      >
-        More about Me
-      </Button>
+      <Link href="/cv">
+        <Button 
+          variant="outline" 
+          className="mt-10 bg-gray-800 text-white rounded-full hover:opacity-90 transition-opacity"
+        >
+          View My CV
+        </Button>
+      </Link>
     </div>
   )
 }

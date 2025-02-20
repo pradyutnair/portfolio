@@ -1,5 +1,6 @@
 "use client"
 
+import Image from 'next/image'
 import { MDXRemote } from 'next-mdx-remote'
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { CodeBlock } from './mdx/code-block'
@@ -41,6 +42,29 @@ const components = {
   ),
   a: ({ href, children }: { href: string; children: any }) => (
     <a href={href} className="text-blue-400 hover:underline">{children}</a>
+  ),
+  Image: ({ src, alt, width, height, style }: any) => (
+    <div className="my-8">
+      <Image 
+        src={src} 
+        alt={alt || ''} 
+        width={width || 800}
+        height={height || 400}
+        className="rounded-lg"
+        style={style}
+      />
+    </div>
+  ),
+  img: ({ src, alt }: any) => (
+    <div className="my-8">
+      <Image 
+        src={src} 
+        alt={alt || ''} 
+        width={800}
+        height={400}
+        className="rounded-lg"
+      />
+    </div>
   )
 }
 
