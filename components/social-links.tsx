@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Twitter, Linkedin, Youtube, Mail } from "lucide-react"
+import { Twitter, Linkedin, Youtube, Github } from "lucide-react"
 
 export function SocialLinks() {
   return (
@@ -19,9 +19,9 @@ export function SocialLinks() {
           </Link>
         </Button>
         <Button variant="ghost" size="icon" asChild>
-          <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-            <Youtube className="w-5 h-5" />
-          </Link>
+          <Link href="https://github.com/pradyutnair" target="_blank" rel="noopener noreferrer">
+            <Github className="w-5 h-5" />
+          </Link> 
         </Button>
       </div>
       <div className="text-gray-400 text-sm">
