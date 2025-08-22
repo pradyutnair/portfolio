@@ -1,39 +1,36 @@
 ---
-title: "Project Two"
-description: "A detailed description of your second project."
-date: "2024-02-19"
-image: "/project1.jpg"
-technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"]
-liveUrl: "https://project1.com"
-githubUrl: "https://github.com/yourusername/project1"
+title: "DCP Guardian"
+description: "An AI-powered Data Collection Plan validation workflow using Agno framework."
+date: "2025-08-19"
+image: "/dcp-guardian-project/dcp-workflow.png"
+technologies: ["Python", "Agno Framework", "Azure OpenAI", "ChromaDB", "SQLite", "Confluence API", "GitHub API"]
+liveUrl: "https://github.com/tomtom-internal/dcp-guardian"
+githubUrl: "https://github.com/tomtom-internal/dcp-guardian"
 ---
 
-Here you can write a detailed blog post about your project using Markdown and MDX.
-You can include code snippets, images, and even React components.
+DCP Guardian is an intelligent workflow system that automates the validation of Data Collection Plans (DCPs) using AI agents and structured workflows. Built on the Agno framework, it streamlines the review process for technical documentation, ensuring consistency and completeness across FCD (Fleet Control Data) projects.
 
-```typescript
-// Example code snippet
-const MyComponent = () => {
-  return <div>Hello World!</div>
-}
-```
+### The Problem
+Data Collection Plans require extensive manual review across multiple domains: GitHub PR validation, Confluence documentation analysis, event definitions verification, and metrics coverage assessment. This process is time-consuming, error-prone, and often leads to inconsistent validation results. Teams need a reliable, automated system that can comprehensively validate DCPs while providing actionable feedback.
 
-## The Problem
+### The Solution
+DCP Guardian leverages Agno's AI agent orchestration to create a multi-step validation pipeline. The system uses specialized agents for different validation tasks, runs parallel analysis where possible, and implements conditional branching based on validation results. If template validation fails, it provides immediate feedback; if it passes, it proceeds with comprehensive analysis including PR review, event validation, and metrics assessment.
+![Workflow Architecture](/dcp-guardian-project/workflow-architecture.png)
 
-Describe the problem you were trying to solve...
+### Technical Details
+<div className="flex gap-2">
+  <div className="tooltip" data-tip="Agno Framework">
+    <Image src="/dcp-guardian-project/agno-logo.png" alt="Agno Logo" width="40" className="inline-block mr-2" />
+  </div>
+  <div className="tooltip" data-tip="Azure OpenAI">
+    <Image src="/dcp-guardian-project/azure-openai-logo.png" alt="Azure OpenAI Logo" width="40" className="inline-block" />
+  </div>
+</div>
 
-## The Solution
+Built with Python and the Agno framework, DCP Guardian orchestrates multiple AI agents through structured workflows. The system uses Azure OpenAI for intelligent analysis, ChromaDB for vector storage of event and metrics knowledge bases, and SQLite for persistent memory and session management. The workflow engine supports conditional branching, parallel execution, and step-by-step validation with comprehensive error handling.
 
-Explain your approach and implementation...
+### Challenges and Learnings
+Integrating multiple AI agents while maintaining workflow state and ensuring consistent output formatting was challenging. The Agno framework's executor pattern required careful attention to session state management, and UI rendering issues in the Playground necessitated converting all outputs to markdown strings. I learned about AI agent orchestration, workflow design patterns, and the importance of structured data flow in complex validation systems.
 
-## Technical Details
-
-Go into the technical aspects of your project...
-
-## Challenges and Learnings
-
-Share what you learned and the challenges you faced...
-
-### Conclusion
-
-Wrap up with final thoughts and future improvements...
+### Final Thoughts
+DCP Guardian represents a significant step toward automated technical documentation validation. By combining AI agents with structured workflows, it provides consistent, comprehensive DCP reviews while reducing manual effort. Future improvements include expanding the knowledge bases, adding more validation rules, and integrating with additional development tools to create a seamless validation experience.
