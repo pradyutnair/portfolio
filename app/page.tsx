@@ -11,15 +11,15 @@ export default async function Portfolio() {
 
   return (
     <div className="min-h-screen bg-black text-white p-6">
-      <div className="max-w-4xl mx-auto space-y-16">
+      <div className="max-w-4xl mx-auto space-y-8">
         <ProfileSection />
         <ProjectsGrid projects={projects} />
         <TechStack />
-        <div className="py-8">
+        <div className="py-4">
           <GitHubCommitHistory usernames={['pradyutnair']} />
         </div>
         <ContactButton />
-        <SocialLinks />
+        {/* <SocialLinks /> */}
       </div>
     </div>
   )

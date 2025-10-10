@@ -13,6 +13,7 @@ export interface ProjectFrontmatter {
   technologies: string[]
   liveUrl?: string
   githubUrl?: string
+  isInternal?: boolean
 }
 
 export interface ProjectData extends ProjectFrontmatter {

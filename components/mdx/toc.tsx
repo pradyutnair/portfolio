@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import { Text } from '@geist-ui/core'
 
 interface TocItem {
   id: string
@@ -16,7 +15,11 @@ export function TableOfContents() {
   useEffect(() => {
     // Function to get all headings
     const getHeadings = () => {
-      const elements = Array.from(document.querySelectorAll('h1, h2, h3'))
+      const article = document.querySelector('article.prose')
+      if (!article) return
+      
+      const elements = Array.from(article.querySelectorAll('h1, h2, h3'))
+        .filter(element => element.id) // Only include headings with IDs
         .map(element => ({
           id: element.id,
           text: element.textContent || '',
@@ -27,6 +30,9 @@ export function TableOfContents() {
 
     // Initial load of headings
     getHeadings()
+    
+    // Re-check headings after a short delay to ensure MDX content is rendered
+    const timeout = setTimeout(getHeadings, 100)
 
     // Set up intersection observer
     const observer = new IntersectionObserver(
@@ -50,7 +56,10 @@ export function TableOfContents() {
     })
 
     // Cleanup
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      clearTimeout(timeout)
+    }
   }, [headings.length])
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -68,7 +77,7 @@ export function TableOfContents() {
 
   return (
     <nav className="hidden lg:block sticky top-20 ml-8 space-y-4 max-w-[200px]">
-      <Text h4>On this page</Text>
+      <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">On this page</h4>
       <ul className="space-y-2 text-sm">
         {headings.map(heading => (
           <li 

@@ -1,12 +1,19 @@
 ---
-title: "DCP Guardian"
+title: "Production RAG Agent"
 description: "An AI-powered Data Collection Plan validation workflow using Agno framework."
-date: "2025-08-19"
-image: "/dcp-guardian-project/dcp-workflow.png"
+date: "2024-08-19"
+image: "/dcp-guardian-project/hero-image.png"
 technologies: ["Python", "Agno Framework", "Azure OpenAI", "ChromaDB", "SQLite", "Confluence API", "GitHub API"]
-liveUrl: "https://github.com/tomtom-internal/dcp-guardian"
-githubUrl: "https://github.com/tomtom-internal/dcp-guardian"
+liveUrl: ""
+githubUrl: ""
+isInternal: true
 ---
+
+<div className="flex items-center justify-center gap-8 mb-8 p-6 bg-gray-900 rounded-lg">
+  <Image src="/dcp-guardian-project/agno logo.jpg" alt="Agno Framework" width={120} height={120} className="object-contain" />
+  <span className="text-4xl text-gray-400">×</span>
+  <Image src="/cv/tomtom-logo.png" alt="TomTom" width={120} height={120} className="object-contain" />
+</div>
 
 DCP Guardian is an intelligent workflow system that automates the validation of Data Collection Plans (DCPs) using AI agents and structured workflows. Built on the Agno framework, it streamlines the review process for technical documentation, ensuring consistency and completeness across FCD (Fleet Control Data) projects.
 
@@ -15,15 +22,17 @@ Data Collection Plans require extensive manual review across multiple domains: G
 
 ### The Solution
 DCP Guardian leverages Agno's AI agent orchestration to create a multi-step validation pipeline. The system uses specialized agents for different validation tasks, runs parallel analysis where possible, and implements conditional branching based on validation results. If template validation fails, it provides immediate feedback; if it passes, it proceeds with comprehensive analysis including PR review, event validation, and metrics assessment.
-![Workflow Architecture](/dcp-guardian-project/workflow-architecture.png)
 
 ### Technical Details
-<div className="flex gap-2">
+<div className="flex items-center justify-center gap-8 mb-6">
   <div className="tooltip" data-tip="Agno Framework">
-    <Image src="/dcp-guardian-project/agno-logo.png" alt="Agno Logo" width="40" className="inline-block mr-2" />
+    <Image src="/dcp-guardian-project/agno logo.jpg" alt="Agno Logo" width={80} height={80} className="inline-block object-contain" />
   </div>
   <div className="tooltip" data-tip="Azure OpenAI">
-    <Image src="/dcp-guardian-project/azure-openai-logo.png" alt="Azure OpenAI Logo" width="40" className="inline-block" />
+    <Image src="/dcp-guardian-project/azure-openai.png" alt="Azure OpenAI Logo" width={140} height={140} className="inline-block object-contain" />
+  </div>
+  <div className="tooltip" data-tip="ChromaDB">
+    <Image src="/dcp-guardian-project/chroma-logo.png" alt="ChromaDB Logo" width={120} height={80} className="inline-block object-contain" />
   </div>
 </div>
 

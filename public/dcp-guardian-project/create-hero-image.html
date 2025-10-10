@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Image Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+        }
+        .hero-container {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+            border-radius: 12px;
+        }
+        .logo-container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: contain;
+        }
+        .separator {
+            font-size: 80px;
+            color: #666;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-container">
+        <div class="logo-container">
+            <img src="agno logo.jpg" alt="Agno Framework" class="logo">
+        </div>
+        <span class="separator">×</span>
+        <div class="logo-container">
+            <img src="../cv/tomtom-logo.png" alt="TomTom" class="logo">
+        </div>
+    </div>
+    
+    <script>
+        // Instructions: 
+        // 1. Open this file in a browser
+        // 2. Take a screenshot of the hero container (1200x630px)
+        // 3. Save it as "hero-image.png" in the dcp-guardian-project folder
+        // 4. Update the MDX frontmatter to use: image: "/dcp-guardian-project/hero-image.png"
+        console.log('Hero image template loaded. Take a screenshot (1200x630px) and save as hero-image.png');
+    </script>
+</body>
+</html>

@@ -8,7 +8,8 @@ import { TableOfContents } from "@/components/mdx/toc"
 
 
 export default async function ProjectPage({ params }: { params: { id: string } }) {
-  const projectData = await getSerializedProjectContent(params.id)
+  const awaitedParams = await params;
+  const projectData = await getSerializedProjectContent(awaitedParams.id)
 
   if (!projectData) {
     notFound()
@@ -37,27 +38,31 @@ export default async function ProjectPage({ params }: { params: { id: string } }
             <div className="space-y-8">
               <div>
                 <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
-                <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 mb-4">
-                  <time dateTime={project.date}>
-                    {new Date(project.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </time>
-                </div>
+                {project.date && (
+                  <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 mb-4">
+                    <time dateTime={project.date} suppressHydrationWarning>
+                      {new Date(project.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </time>
+                  </div>
+                )}
                 <p className="text-gray-400 mb-6">{project.description}</p>
 
-                <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
-                  {project.technologies.map((tech: string) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-gray-800 rounded-full text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                {project.technologies && project.technologies.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
+                    {project.technologies.map((tech: string) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 bg-gray-800 rounded-full text-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
                 <ProjectActions liveUrl={project.liveUrl} githubUrl={project.githubUrl} />
               </div>
