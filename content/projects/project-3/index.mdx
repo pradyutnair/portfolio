@@ -5,7 +5,7 @@ date: "2025-09-01"
 image: "/dewan-project/dewan-pipeline.jpg"
 technologies: ["Python", "PyTorch", "Diffusion Models", "DiffEdit", "Alibaba Wan 2.1", "Computer Vision", "Video Generation"]
 liveUrl: ""
-githubUrl: ""
+githubUrl: "https://github.com/jhb300/wan-tf-personalization/"
 ---
 
 <div style={{
@@ -92,12 +92,39 @@ We evaluated DEWan on the [OpenS2V-Nexus](https://github.com/PKU-YuanGroup/OpenS
 
 #### Performance Metrics
 
-| Metric | DEWan Score | Ranking |
-| --- | --- | --- |
-| **Video Quality** | 0.89 | Top 5 |
-| **Identity Preservation** | 0.94 | **2nd** (Single-Domain) |
-| **Motion Smoothness** | 0.87 | Top 10 |
-| **Overall AUC** | 92.7% | **4th** (Human-Domain) |
+<div className="overflow-x-auto my-8">
+  <table className="min-w-full border-collapse border border-gray-700">
+    <thead className="bg-gray-800">
+      <tr>
+        <th className="border border-gray-700 px-4 py-3 text-left text-sm font-semibold text-gray-200">Metric</th>
+        <th className="border border-gray-700 px-4 py-3 text-left text-sm font-semibold text-gray-200">DEWan Score</th>
+        <th className="border border-gray-700 px-4 py-3 text-left text-sm font-semibold text-gray-200">Ranking</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="hover:bg-gray-800/50">
+        <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300"><strong>Video Quality</strong></td>
+        <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300">0.89</td>
+        <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300">Top 5</td>
+      </tr>
+      <tr className="hover:bg-gray-800/50">
+        <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300"><strong>Identity Preservation</strong></td>
+        <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300">0.94</td>
+        <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300"><strong>2nd</strong> (Single-Domain)</td>
+      </tr>
+      <tr className="hover:bg-gray-800/50">
+        <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300"><strong>Motion Smoothness</strong></td>
+        <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300">0.87</td>
+        <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300">Top 10</td>
+      </tr>
+      <tr className="hover:bg-gray-800/50">
+        <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300"><strong>Overall AUC</strong></td>
+        <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300">92.7%</td>
+        <td className="border border-gray-700 px-4 py-3 text-sm text-gray-300"><strong>4th</strong> (Human-Domain)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 #### Key Achievements
 
