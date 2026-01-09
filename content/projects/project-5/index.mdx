@@ -1,0 +1,262 @@
+---
+title: "Investment Council"
+description: "An AI-powered investment analysis platform that orchestrates multiple AI models to provide comprehensive due diligence on investment opportunities."
+date: "2025-01-09"
+image: "/investment-council/investment-council-banner.png"
+technologies: ["Next.js 15", "React 19", "TypeScript", "Supabase", "Mastra", "Google Gemini 2.0", "OpenAI GPT-4o", "Anthropic Claude 3.5", "Tailwind CSS"]
+githubUrl: "https://github.com/pradyutnair/investment-council"
+---
+
+Investment Council is an AI-powered investment analysis platform that orchestrates multiple AI models to provide comprehensive due diligence on investment opportunities. The system combines Google Gemini Deep Research with a multi-agent "council" approach, leveraging ChatGPT and Claude to deliver critical analysis from multiple perspectives.
+
+## The Problem
+
+Traditional investment research is time-consuming, expensive, and often biased. Analysts spend weeks compiling research reports, but these reports typically present only one perspective—the bullish case. Critical questions go unanswered: What could go wrong? What risks are being overlooked? What would a contrarian investor see? Without multiple viewpoints, investors make decisions with incomplete information, leading to poor risk-adjusted returns.
+
+## The Solution
+
+Investment Council transforms investment research into a structured, multi-perspective workflow that combines deep AI-powered research with critical analysis from specialized AI agents. Instead of a single analyst's report, you get:
+
+- **Comprehensive Research**: Google Gemini Deep Research conducts thorough market and company analysis
+- **Strategy-Specific Analysis**: Specialized agents evaluate opportunities through different investment lenses (Value, Special Situations, Distressed)
+- **Critical Challenge**: The Skeptic agent tears apart the bullish case, finding flaws and hidden risks
+- **Risk Assessment**: The Risk Officer systematically identifies regulatory, operational, financial, and ESG risks
+- **Final Synthesis**: The Verdict Agent weighs all perspectives to produce INVEST/PASS/WATCH recommendations with conviction levels
+
+This multi-agent approach ensures you see both sides of every investment opportunity before committing capital.
+
+## How It Works
+
+### The Research Workflow
+
+Investment Council supports two primary workflows:
+
+#### 1. Thesis-Based Research Sessions
+
+Perfect for discovering multiple opportunities guided by an investment thesis. Ideal when you have a market view or strategy but need to find specific companies that fit.
+
+**Workflow:**
+1. **Define Your Thesis**: Enter an investment thesis (e.g., "Find undervalued small-cap tech stocks with strong cash flows trading below book value")
+2. **Choose Your Strategy**: Select from Value Investing, Special Situations, Distressed Investing, or General Research
+3. **Deep Research**: Gemini Deep Research analyzes the market, identifies opportunities, and produces comprehensive reports
+4. **Council Critique**: The Skeptic and Risk Officer provide independent critiques of each opportunity
+5. **Final Verdict**: The Verdict Agent synthesizes all perspectives into actionable recommendations
+
+#### 2. Traditional Deal Memos
+
+Focused analysis on a specific investment opportunity. Use this when you already have a company in mind and need comprehensive due diligence.
+
+**Workflow:**
+1. **Scout Phase**: Define the investment thesis for a specific company
+2. **Research Phase**: Gemini produces a deep research report covering fundamentals, market position, competitive landscape, and financials
+3. **Council Phase**: The Skeptic and Risk Officer critique the report in parallel
+4. **Interrogation Phase**: Interactive Q&A with full context to address remaining questions
+5. **Final Decision**: Record your INVEST/PASS/WATCH verdict with notes
+
+### Investment Strategies
+
+The platform supports four specialized investment research strategies, each with its own analytical framework:
+
+#### Value Investing
+
+Following Benjamin Graham and Bruce Greenwald principles, this strategy focuses on:
+- **Margin of Safety**: Finding stocks trading significantly below intrinsic value
+- **Asset Valuation**: Book value, earnings power value (EPV), and franchise value analysis
+- **Financial Health**: Low debt-to-equity, strong current ratios, consistent cash flows
+- **Competitive Moats**: Durable competitive advantages and sustainable business models
+
+**Key Metrics**: P/E < 15, P/B < 1.5, Debt/Equity < 0.5, Current Ratio > 2
+
+**Best For**: Long-term investors seeking undervalued companies with strong fundamentals
+
+#### Special Situations
+
+Joel Greenblatt-style event-driven investing focused on corporate events that create mispricing:
+- **Spinoffs**: Parent companies divesting divisions, often creating undervalued opportunities
+- **Merger Arbitrage**: Price spreads in announced mergers and acquisitions
+- **Restructuring**: Companies undergoing operational or financial restructuring
+- **Catalyst-Driven**: Clear timelines and events that unlock value
+
+**Key Focus**: Identifying catalysts, mispricing from forced selling, and hidden value not reflected in current prices
+
+**Best For**: Investors comfortable with event-driven strategies and defined timelines
+
+#### Distressed Investing
+
+Howard Marks and Oaktree-style contrarian investing during market cycles:
+- **Market Cycle Analysis**: Identifying cycle bottoms and forced seller dynamics
+- **Distressed Debt**: Companies or sectors experiencing significant distress
+- **Turnaround Situations**: Beaten-down stocks with identifiable recovery paths
+- **Asymmetric Risk/Reward**: Limited downside with significant upside potential
+
+**Key Focus**: Stocks down 50%+ from highs, temporary vs. permanent distress, strong underlying assets
+
+**Best For**: Contrarian investors comfortable with higher risk and volatility
+
+#### General Research
+
+Comprehensive company and market analysis without a specific strategy filter:
+- **Fundamental Analysis**: Complete financial and operational review
+- **Market Context**: Industry trends, competitive positioning, market share
+- **Risk/Reward Assessment**: Asymmetric opportunity identification
+- **Flexible Framework**: Adapts to any investment thesis
+
+**Best For**: Investors exploring opportunities without a predefined strategy
+
+## Research Capabilities
+
+### Financial Data Integration
+
+Investment Council integrates with Financial Modeling Prep (FMP) to provide real-time access to:
+
+**Fundamentals**
+- Income statements, balance sheets, cash flow statements
+- Historical financials with multi-year comparisons
+- Quarterly and annual reporting
+
+**Valuation Metrics**
+- P/E, P/B, EV/EBITDA ratios
+- Enterprise value calculations
+- Growth rates and profitability metrics
+- Key performance indicators (KPIs)
+
+**Market Data**
+- Real-time and historical price data
+- Intraday price movements
+- Analyst price targets and estimates
+- Earnings calendars and surprises
+
+**SEC Filings**
+- 10-K annual reports
+- 10-Q quarterly reports
+- 8-K current reports
+- Full text search across filings
+
+**Insider & Institutional Data**
+- Insider trading activity
+- Institutional ownership
+- Mutual fund holdings
+- Management ownership stakes
+
+**News & Sentiment**
+- Company-specific news
+- Press releases
+- News sentiment analysis
+- General market news
+
+**Screening Tools**
+- Strategy-specific screeners (Value, Growth, Distressed, Dividend)
+- Custom screening criteria
+- Market movers (gainers, losers, most active)
+- Sector performance analysis
+
+### AI-Powered Research
+
+**Google Gemini Deep Research**
+- Conducts multi-step research across web sources
+- Synthesizes information into comprehensive reports
+- Provides real-time progress updates
+- Strategy-specific research prompts tailored to each investment approach
+
+**Specialized Agent Analysis**
+- Strategy agents evaluate opportunities through their specific frameworks
+- Each agent has access to financial tools and market data
+- Produces detailed analysis aligned with investment philosophy
+
+**Autonomous Opportunity Discovery**
+- Screener agents proactively search for opportunities
+- Value Screener: Finds undervalued stocks meeting Graham criteria
+- Special Situations Screener: Identifies spinoffs, mergers, restructurings
+- Distressed Screener: Discovers beaten-down stocks with recovery potential
+- Market Movers Agent: Tracks significant price movements and catalysts
+
+## The Investment Council
+
+The platform's namesake feature—a council of AI agents that provide independent critiques:
+
+### The Skeptic
+
+A professional short seller and contrarian investor that:
+- Identifies overly optimistic assumptions
+- Finds cherry-picked data and survivorship bias
+- Highlights hidden risks and red flags
+- Challenges bullish narratives with counter-evidence
+- Quantifies valuation concerns and multiple compression risks
+
+**Output**: Structured critique covering key concerns, missing analysis, base case vs. bear case scenarios
+
+### The Risk Officer
+
+A Chief Risk Officer that systematically assesses:
+- **Regulatory & Legal Risks**: Compliance issues, litigation exposure
+- **Operational Risks**: Execution challenges, management capacity
+- **Financial Risks**: Leverage, liquidity, cash burn, covenant risks
+- **Market & Competition Risks**: Disruption threats, market share loss
+- **Macro & Systemic Risks**: Interest rates, recession, sector headwinds
+- **ESG Risks**: Environmental, social, and governance concerns
+
+**Output**: Comprehensive risk assessment with probability × impact analysis and mitigation recommendations
+
+### The Verdict Agent
+
+Synthesizes all perspectives into final recommendations:
+- Weighs research, strategy analysis, skeptic critique, and risk assessment
+- Produces INVEST/PASS/WATCH recommendations with conviction levels (0-100%)
+- Provides position sizing guidance and risk management parameters
+- Identifies remaining questions and due diligence items
+- Calculates fair value estimates and margin of safety
+
+**Decision Framework**:
+- **INVEST** (≥60% conviction): Attractive risk-adjusted return, credible bull case, manageable concerns
+- **PASS**: Unattractive risk/reward, weak bull case, significant concerns
+- **WATCH** (40-60% conviction): Interesting but needs more information or better entry point
+
+## Interrogation Phase
+
+After receiving research and critiques, the Interrogation Phase allows you to:
+- Ask questions about specific aspects of the investment
+- Get clarifications on risks or opportunities
+- Explore scenarios and what-if analyses
+- Finalize your understanding before making a decision
+
+The interrogation agent has full context of:
+- Original research report
+- Strategy agent analysis
+- Skeptic's critique
+- Risk Officer's assessment
+- Current market data
+
+This ensures you can dig deeper into any aspect of the investment opportunity before committing capital.
+
+## Key Features
+
+### Multi-Perspective Analysis
+Every investment opportunity is analyzed from multiple angles, ensuring you see both the bullish case and potential pitfalls.
+
+### Strategy-Specific Frameworks
+Each investment strategy has its own analytical framework, ensuring research aligns with your investment philosophy.
+
+### Real-Time Financial Data
+Access to comprehensive financial data through FMP integration, including fundamentals, metrics, filings, and market data.
+
+### Autonomous Discovery
+Screener agents proactively find opportunities matching your criteria, saving hours of manual screening.
+
+### Interactive Q&A
+The Interrogation Phase lets you explore any aspect of an investment with full context awareness.
+
+### Structured Workflows
+Clear phases from research to decision, ensuring comprehensive due diligence on every opportunity.
+
+### Verdict Synthesis
+The Verdict Agent weighs all perspectives to provide clear, actionable recommendations with conviction levels.
+
+## Use Cases
+
+**Individual Investors**: Conduct institutional-quality research without the cost of hiring analysts or subscribing to expensive research services.
+
+**Investment Clubs**: Standardize research processes and ensure multiple perspectives are considered before group decisions.
+
+**Portfolio Managers**: Quickly evaluate opportunities across different strategies with consistent analytical frameworks.
+
+**Students & Learners**: Understand how professional investors analyze opportunities through structured, multi-perspective research.

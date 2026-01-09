@@ -1,0 +1,71 @@
+---
+title: "Concept-Aware Geolocation"
+description: "An interpretable geolocation system using Hierarchical Concept Bottleneck Models with vision-language foundations for explaining location predictions."
+date: "2024-12-15"
+image: "/geoguessr-cbm-project/arch3.png"
+technologies: ["Python", "PyTorch", "CLIP", "GeoCLIP", "FastAPI", "TypeScript", "LaTeX"]
+githubUrl: "https://github.com/pradyutnair/geoguessr-cbm"
+---
+
+GeoGuessr players instinctively know *why* they place a marker somewhere—they spot distinctive road markings, recognize architectural styles, or identify unique vegetation. But machine learning geolocation models operate as black boxes, making predictions without explaining their reasoning. Concept-Aware Geolocation bridges this gap by forcing all location predictions to flow through human-interpretable semantic concepts.
+
+## The Motivation
+
+Existing geolocation systems like PlaNet and PIGEON achieve impressive accuracy but provide no insight into their decision-making process. When a model predicts "this image is in Brazil," we can't ask what visual features led to that conclusion. This opacity is problematic for safety-critical applications where understanding the reasoning is as important as the prediction itself.
+
+## The Approach
+
+I built a three-stage curriculum learning pipeline that combines the power of vision-language models with the interpretability of concept bottlenecks. The key insight: instead of mapping images directly to GPS coordinates, we first predict semantic concepts (like "Urban Street," "Suburban Road," "License Plates visible") and then use those concepts to predict location.
+
+### Stage 0: Domain Contrastive Pretraining
+
+The foundation starts with StreetCLIP and GeoCLIP—models that have learned powerful geographic representations from millions of images. But they're not optimized for the challenging GeoGuessr "meta" locations curated by the community. I developed a contrastive pretraining stage with a custom GPS adapter network (512d→768d) that aligns GeoCLIP's location embeddings with StreetCLIP's image features, creating a unified embedding space where visually similar locations cluster together.
+
+### Stage 1: Text-Anchored Concept Learning
+
+Rather than learning concept prototypes from scratch, I initialize them from CLIP text embeddings. This means the prototype for "Urban Street" starts close to CLIP's understanding of that phrase, then adapts through learnable residuals to capture street-view specific patterns. The model learns ~100 fine-grained child concepts (like "Highway," "Roundabout," "Unique car") that roll up into ~15 coarse parent concepts (like "Urban," "Rural," "Infrastructure").
+
+What's clever here is the hierarchical consistency loss—the model learns that if it predicts "Highway" (child), it should also predict "Infrastructure" (parent). This creates a structured semantic understanding that mirrors how humans reason about locations.
+
+### Stage 2: Gated Fusion for Geolocation
+
+The final stage predicts coordinates by combining concept embeddings with spatial image information. A cross-attention mechanism lets the concept embedding query image patches to extract relevant spatial context—essentially asking "which parts of the image support this concept prediction?"
+
+The real innovation is the learned gate. Instead of naively concatenating features, the model learns per-dimension weights that balance concept vs. spatial information. Gate values near 1 mean "rely on concepts" (good for architecture, road markings), while values near 0 mean "rely on spatial patterns" (good for vegetation, lighting). Median gate value around 0.58 shows the model uses a balanced combination, with dimensional specialization revealing which geographic features depend on semantic understanding.
+
+## The Data
+
+I trained on 43,040 street view images from learnablemeta.com—a treasure trove of challenging GeoGuessr locations. Each image has GPS coordinates, hierarchical concept labels, and country information. The model uses adaptive geocells generated through per-country K-means clustering, producing 1,048 cells that provide finer granularity in data-dense regions (Europe, South America, East Asia) while maintaining global coverage.
+
+## Results
+
+![Architecture Diagram](/geoguessr-cbm-project/arch3.png)
+
+The model achieves competitive performance while providing full interpretability:
+
+- **In-Distribution Test**: 126 km median error with 82.9% country-level accuracy
+- **Out-of-Distribution GeoGuessr**: 350 km median error on held-out challenging locations
+- **Live GeoGuessr Games**: 549.8 km median vs. 849.0 km for human players—actually beating humans!
+- **Concept-Only Performance**: Within 10% of full model, proving the bottleneck doesn't sacrifice much accuracy
+
+## Interpretability in Action
+
+![Interpretability Example](/geoguessr-cbm-project/round_09_110825_concepts.png)
+
+The interpretability features reveal the model's reasoning process:
+
+- **Patch-level attention maps** show exactly which image regions support each prediction (vehicles, license plates, road geometry)
+- **Hierarchical concept predictions** give both specific ("Unique car," "License Plates") and coarse ("car_meta," "landscape_savannah") level insights
+- **Gate value analysis** reveals dimensional specialization—some dimensions are concept-dominated, others spatial-dominated
+
+For example, when identifying a West African location, the model attends to unique vehicles and license plates while predicting concepts like "Unique car" and "License Plates," with parent concepts indicating "car_meta" and "landscape_savannah" categories. The gate value of 0.431 shows balanced concept-spatial reasoning.
+
+## Technical Stack
+
+Built with PyTorch, leveraging CLIP, StreetCLIP, and GeoCLIP as foundation models. Inference served via FastAPI with an automated bot that integrates directly with GeoGuessr's game API for real-time evaluation. The complete research paper documents methodology, experiments, and analysis in LaTeX.
+
+## Why This Matters
+
+This work demonstrates that interpretability doesn't require sacrificing accuracy. By enforcing a concept bottleneck, we get predictions that can be inspected, understood, and even debugged. The learned gates reveal which aspects of geolocation rely on semantic concepts versus spatial patterns, providing insights into how the model reasoning about geographic features.
+
+Future directions include automatic concept discovery, temporal reasoning for video geolocation, and interactive explanation interfaces that communicate model reasoning to end users.

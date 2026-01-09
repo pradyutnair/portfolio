@@ -1,6 +1,13 @@
 'use client'
 
 import { Badge } from "@/components/ui/badge";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -33,7 +40,7 @@ const ProjectCard = ({
 
   return (
     <div
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-black hover:border-white transition-all cursor-pointer isolate"
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-black hover:border-white transition-all cursor-pointer isolate h-full"
       role="link"
       tabIndex={0}
       aria-label={`${title} details`}
@@ -119,16 +126,31 @@ const ProjectCard = ({
 export function ProjectsGrid({ projects }: { projects: ProjectData[] }) {
   return (
     <section id="projects" className="relative py-20 px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-2xl font-mono mb-4 text-center text-white">Projects</h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} {...project} />
-          ))}
-        </div>
+        <Carousel
+          opts={{
+            align: "center",
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {projects.map((project) => (
+              <CarouselItem
+                key={project.id}
+                className="md:basis-1/2 lg:basis-1/3 xl:basis-1/3"
+              >
+                <ProjectCard {...project} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
+        </Carousel>
       </div>
     </section>
   );
