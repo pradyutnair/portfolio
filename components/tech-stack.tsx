@@ -5,8 +5,17 @@ import { FaPython, FaReact, FaGit } from "react-icons/fa"
 import { SiTypescript, SiPytorch, SiMysql, SiNextdotjs } from "react-icons/si"
 import { BsFillBarChartFill } from "react-icons/bs"
 import { VscAzure } from "react-icons/vsc"
+import { memo } from "react"
 
-export function TechStack() {
+const TechIcon = memo(function TechIcon({ Icon, name }: { Icon: any; name: string }) {
+  return (
+    <div className="w-12 h-12 text-white flex justify-center items-center mx-4 will-change-transform">
+      <Icon size={40} />
+    </div>
+  )
+})
+
+export const TechStack = memo(function TechStack() {
   return (
     <section className="bg-black rounded-xl p-6 overflow-hidden relative">
       <h2 className="text-2xl font-mono mb-4 text-center text-white">My Tech Stack</h2>
@@ -20,40 +29,23 @@ export function TechStack() {
           speed={20}
           pauseOnHover={true}
           gradient={false}
+          style={{ willChange: 'transform' }}
         >
           {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex">
-              <div className="w-12 h-12 text-white flex justify-center items-center mx-4">
-                <FaPython size={40} />
-              </div>
-              <div className="w-12 h-12 text-white flex justify-center items-center mx-4">
-                <SiTypescript size={40} />
-              </div>
-              <div className="w-12 h-12 text-white flex justify-center items-center mx-4">
-                <SiPytorch size={40} />
-              </div>
-              <div className="w-12 h-12 text-white flex justify-center items-center mx-4">
-                <SiMysql size={40} />
-              </div>
-              <div className="w-12 h-12 text-white flex justify-center items-center mx-4">
-                <SiNextdotjs size={40} />
-              </div>
-              <div className="w-12 h-12 text-white flex justify-center items-center mx-4">
-                <FaReact size={40} />
-              </div>
-              <div className="w-12 h-12 text-white flex justify-center items-center mx-4">
-                <FaGit size={40} />
-              </div>
-              <div className="w-12 h-12 text-white flex justify-center items-center mx-4">
-                <BsFillBarChartFill size={40} />
-              </div>
-              <div className="w-12 h-12 text-white flex justify-center items-center mx-4">
-                <VscAzure size={40} />
-              </div>
+            <div key={i} className="flex" style={{ transform: 'translateZ(0)' }}>
+              <TechIcon Icon={FaPython} name="Python" />
+              <TechIcon Icon={SiTypescript} name="TypeScript" />
+              <TechIcon Icon={SiPytorch} name="PyTorch" />
+              <TechIcon Icon={SiMysql} name="MySQL" />
+              <TechIcon Icon={SiNextdotjs} name="Next.js" />
+              <TechIcon Icon={FaReact} name="React" />
+              <TechIcon Icon={FaGit} name="Git" />
+              <TechIcon Icon={BsFillBarChartFill} name="Analytics" />
+              <TechIcon Icon={VscAzure} name="Azure" />
             </div>
           ))}
         </Marquee>
       </div>
     </section>
   )
-}
+})

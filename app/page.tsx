@@ -13,12 +13,14 @@ export default async function Portfolio() {
     <div className="min-h-screen bg-black text-white p-6">
       <div className="max-w-4xl mx-auto space-y-8">
         <ProfileSection />
-        <ProjectsGrid projects={projects} />
-        <TechStack />
-        <div className="py-4">
-          <GitHubCommitHistory usernames={['pradyutnair']} />
+        <div style={{ contentVisibility: 'auto' }}>
+          <ProjectsGrid projects={projects} />
+          <TechStack />
+          <div className="py-4" style={{ containIntrinsicSize: '0 500px' }}>
+            <GitHubCommitHistory usernames={['pradyutnair']} />
+          </div>
+          <ContactButton />
         </div>
-        <ContactButton />
         {/* <SocialLinks /> */}
       </div>
     </div>

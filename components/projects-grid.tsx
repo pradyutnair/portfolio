@@ -12,6 +12,7 @@ import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ProjectData } from "@/lib/mdx";
+import { memo } from "react";
 
 interface ProjectCardProps {
   id: string;
@@ -24,7 +25,7 @@ interface ProjectCardProps {
   isInternal?: boolean;
 }
 
-const ProjectCard = ({
+const ProjectCard = memo(function ProjectCard({
   id,
   title,
   description,
@@ -33,14 +34,14 @@ const ProjectCard = ({
   liveUrl,
   githubUrl,
   isInternal,
-}: ProjectCardProps) => {
+}: ProjectCardProps) {
   const router = useRouter();
 
   const imageSrc = image && image.trim() ? image : "/placeholder.svg";
 
   return (
     <div
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-black hover:border-white transition-all cursor-pointer isolate h-full"
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-black hover:border-white transition-all cursor-pointer isolate h-full will-change-transform"
       role="link"
       tabIndex={0}
       aria-label={`${title} details`}
@@ -57,8 +58,10 @@ const ProjectCard = ({
         <Image
           src={imageSrc}
           alt={title || 'Project image'}
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          className="object-cover transition-transform duration-300 group-hover:scale-105 will-change-transform"
           fill
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
       </div>
 
@@ -121,7 +124,7 @@ const ProjectCard = ({
       </div>
     </div>
   );
-};
+});
 
 export function ProjectsGrid({ projects }: { projects: ProjectData[] }) {
   return (
@@ -131,13 +134,16 @@ export function ProjectsGrid({ projects }: { projects: ProjectData[] }) {
           <h2 className="text-2xl font-mono mb-4 text-center text-white">Projects</h2>
         </div>
 
-        <Carousel
-          opts={{
-            align: "center",
-            loop: true,
-          }}
-          className="w-full"
-        >
+        <div className="relative -mx-12 md:mx-0 md:px-12">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+              skipSnaps: false,
+              dragFree: false,
+            }}
+            className="w-full"
+          >
           <CarouselContent>
             {projects.map((project) => (
               <CarouselItem
@@ -150,7 +156,8 @@ export function ProjectsGrid({ projects }: { projects: ProjectData[] }) {
           </CarouselContent>
           <CarouselPrevious className="hidden md:flex" />
           <CarouselNext className="hidden md:flex" />
-        </Carousel>
+          </Carousel>
+        </div>
       </div>
     </section>
   );

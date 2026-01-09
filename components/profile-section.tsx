@@ -3,11 +3,19 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { memo } from "react"
 
-export function ProfileSection() {
+export const ProfileSection = memo(function ProfileSection() {
   return (
     <div className="text-center space-y-6">
-      <Image src="/prad-icon.jpg" alt="Profile" width={120} height={120} className="rounded-full mx-auto" />
+      <Image
+        src="/prad-icon.jpg"
+        alt="Profile"
+        width={120}
+        height={120}
+        className="rounded-full mx-auto"
+        priority
+      />
       <div>
         <h1 className="text-4xl font-mono">Pradyut Nair</h1>
         <p className="text-gray-400 text-xl mt-2">(Future) AI Engineer</p>
@@ -21,8 +29,8 @@ export function ProfileSection() {
         curiosity.
       </p>
       <Link href="/cv">
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           className="mt-10 bg-gray-800 text-white rounded-full transition-opacity"
         >
           View My CV
@@ -30,4 +38,4 @@ export function ProfileSection() {
       </Link>
     </div>
   )
-}
+})
