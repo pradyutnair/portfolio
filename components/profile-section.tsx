@@ -18,15 +18,14 @@ export const ProfileSection = memo(function ProfileSection() {
       />
       <div>
         <h1 className="text-4xl font-mono">Pradyut Nair</h1>
-        <p className="text-gray-400 text-xl mt-2">(Future) AI Engineer</p>
+        {/* <p className="text-gray-400 text-xl mt-2">AI Engineer</p> */}
       </div>
       <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
         I'm an Master's AI student at the University of Amsterdam, alongside interning at{" "}
-        <a className="underline" href="https://www.tomtom.com" rel="noopener noreferrer">
-          TomTom
+        <a className="underline" href="https://www.prosus.com" rel="noopener noreferrer">
+          Prosus
         </a>{" "}
-        as a Data Analyst. My research interests lie in Deep Learning, Natural Language Processing, and wizardry🧙. Currently exploring the boundaries of
-        curiosity.
+        as an AI Engineer. I am currently involved in developing multi-agentic systems and creative LLM-powered solutions. My research interests lie in Information Retrieval, Natural Language Processing, and Vision-Language Models.
       </p>
       <Link href="/cv">
         <Button
