@@ -54,7 +54,7 @@ const ProjectCard = memo(function ProjectCard({
       }}
     >
       {/* Project Image */}
-      <div className="relative h-64 overflow-hidden bg-accent">
+      <div className="relative h-48 md:h-64 overflow-hidden bg-accent">
         <Image
           src={imageSrc}
           alt={title || 'Project image'}
@@ -66,30 +66,30 @@ const ProjectCard = memo(function ProjectCard({
       </div>
 
       {/* Content */}
-      <div className="flex-1 flex flex-col p-6">
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-muted-foreground mb-4 overflow-hidden" style={{
+      <div className="flex-1 flex flex-col p-4 md:p-6">
+        <h3 className="text-lg md:text-xl font-semibold mb-2">{title}</h3>
+        <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4 overflow-hidden" style={{
           display: '-webkit-box',
-          WebkitLineClamp: 3,
+          WebkitLineClamp: 2,
           WebkitBoxOrient: 'vertical' as const,
         }}>{description}</p>
 
         {/* Technologies */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {(technologies || []).slice(0, 4).map((tech) => (
-            <Badge key={tech} variant="secondary" className="rounded-full">
+        <div className="flex flex-wrap gap-1.5 md:gap-2 mb-4 md:mb-6">
+          {(technologies || []).slice(0, 3).map((tech) => (
+            <Badge key={tech} variant="secondary" className="rounded-full text-xs">
               {tech}
             </Badge>
           ))}
-          {Array.isArray(technologies) && technologies.length > 4 && (
-            <Badge variant="secondary" className="rounded-full ">
-              +{technologies.length - 4} more
+          {Array.isArray(technologies) && technologies.length > 3 && (
+            <Badge variant="secondary" className="rounded-full text-xs">
+              +{technologies.length - 3} more
             </Badge>
           )}
         </div>
 
         {/* Actions */}
-        <div className="flex gap-2 mt-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="flex gap-2 mt-auto flex-wrap" onClick={(e) => e.stopPropagation()}>
           {isInternal ? (
             <div className="inline-flex items-center justify-center gap-1.5 rounded-md bg-gray-800 border border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-300 cursor-default">
               Internal Tool
@@ -128,13 +128,14 @@ const ProjectCard = memo(function ProjectCard({
 
 export function ProjectsGrid({ projects }: { projects: ProjectData[] }) {
   return (
-    <section id="projects" className="relative py-20 px-6">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl font-mono mb-4 text-center text-white">Projects</h2>
+    <section id="projects" className="relative py-12 md:py-20">
+      <div className="px-4 md:px-6 mb-8 md:mb-12">
+        <div className="text-center">
+          <h2 className="text-xl md:text-2xl font-mono mb-4 text-center text-white">Projects</h2>
         </div>
+      </div>
 
-        <div className="relative -mx-12 md:mx-0 md:px-12">
+      <div className="relative w-full px-4 md:px-16">
           <Carousel
             opts={{
               align: "start",
@@ -144,20 +145,19 @@ export function ProjectsGrid({ projects }: { projects: ProjectData[] }) {
             }}
             className="w-full"
           >
-          <CarouselContent>
+          <CarouselContent className="-ml-4">
             {projects.map((project) => (
               <CarouselItem
                 key={project.id}
-                className="md:basis-1/2 lg:basis-1/3 xl:basis-1/3"
+                className="pl-4 basis-[85%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
               >
                 <ProjectCard {...project} />
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex" />
-          <CarouselNext className="hidden md:flex" />
+          <CarouselPrevious />
+          <CarouselNext />
           </Carousel>
-        </div>
       </div>
     </section>
   );
