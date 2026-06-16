@@ -1,12 +1,9 @@
-"use client"
-
 import NextImage from 'next/image'
-import { MDXRemote } from 'next-mdx-remote'
-import type { MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { MDXRemote } from 'next-mdx-remote/rsc'
 import { CodeBlock } from './mdx/code-block'
 
 interface MDXContentProps {
-  source: MDXRemoteSerializeResult
+  source: string
 }
 
 const components = {
@@ -41,7 +38,7 @@ const components = {
     <li className="text-gray-300">{children}</li>
   ),
   a: ({ href, children, ...props }: any) => (
-    <a href={href} className="text-blue-400 hover:underline" {...props}>{children}</a>
+    <a href={href} className="text-white underline underline-offset-4 decoration-white/30 hover:decoration-white" {...props}>{children}</a>
   ),
   Image: ({ src, alt, width, height, style, className }: any) => (
     <NextImage
@@ -99,7 +96,7 @@ const components = {
 export function MDXContent({ source }: MDXContentProps) {
   return (
     <article className="prose prose-invert max-w-none">
-      <MDXRemote {...source} components={components} />
+      <MDXRemote source={source} components={components} />
     </article>
   )
 }

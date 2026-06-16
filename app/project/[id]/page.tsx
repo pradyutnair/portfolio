@@ -1,21 +1,19 @@
 import Link from "next/link"
 import Image from "next/image"
-import { getSerializedProjectContent } from "@/lib/mdx"
+import { getProjectData } from "@/lib/mdx"
 import { notFound } from "next/navigation"
 import { ProjectActions } from "@/components/project-actions"
 import { MDXContent } from "@/components/mdx-content"
 import { TableOfContents } from "@/components/mdx/toc"
 
 
-export default async function ProjectPage({ params }: { params: { id: string } }) {
-  const awaitedParams = await params;
-  const projectData = await getSerializedProjectContent(awaitedParams.id)
+export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const project = await getProjectData(id)
 
-  if (!projectData) {
+  if (!project) {
     notFound()
   }
-
-  const { frontmatter: project, mdxSource } = projectData
 
   return (
     <div className="min-h-screen bg-black text-white p-4 sm:p-6">
@@ -67,11 +65,11 @@ export default async function ProjectPage({ params }: { params: { id: string } }
                 <ProjectActions liveUrl={project.liveUrl} githubUrl={project.githubUrl} />
               </div>
 
-              <MDXContent source={mdxSource} />
+              <MDXContent source={project.content} />
             </div>
           </div>
           
-          <div className="hidden lg:block sticky top-6 h-fit">
+          <div className="hidden lg:block sticky top-24 h-fit">
             <TableOfContents />
           </div>
         </div>

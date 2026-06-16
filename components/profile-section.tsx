@@ -7,30 +7,39 @@ import { memo } from "react"
 
 export const ProfileSection = memo(function ProfileSection() {
   return (
-    <div className="text-center space-y-6">
+    <div className="flex flex-col items-center text-center space-y-6">
       <Image
         src="/prad-icon.jpg"
-        alt="Profile"
+        alt="Pradyut Nair"
         width={120}
         height={120}
-        className="rounded-full mx-auto"
+        className="rounded-full"
         priority
       />
       <div>
-        <h1 className="text-4xl font-mono">Pradyut Nair</h1>
-        {/* <p className="text-gray-400 text-xl mt-2">AI Engineer</p> */}
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Pradyut Nair</h1>
+        <p className="mt-2 text-sm text-white/50">AI Engineer · UvA · Prosus</p>
       </div>
-      <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-        I'm an Master's AI student at the University of Amsterdam, alongside interning at{" "}
-        <a className="underline" href="https://www.prosus.com" rel="noopener noreferrer">
+
+      <p className="max-w-2xl text-lg leading-relaxed text-white/70">
+        I'm a Master's AI student at the University of Amsterdam, alongside interning at{" "}
+        <a
+          className="text-white underline underline-offset-4 transition-opacity hover:opacity-70"
+          href="https://www.prosus.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Prosus
         </a>{" "}
-        as an AI Engineer. I am currently involved in developing multi-agentic systems and creative LLM-powered solutions. My research interests lie in Information Retrieval, Natural Language Processing, and Vision-Language Models.
+        as an AI Engineer. I'm currently building multi-agentic systems and creative LLM-powered
+        solutions. My research interests lie in Information Retrieval, Natural Language Processing,
+        and Vision-Language Models.
       </p>
+
       <Link href="/cv">
         <Button
           variant="outline"
-          className="mt-10 bg-gray-800 text-white rounded-full transition-opacity"
+          className="rounded-full border-white/20 bg-transparent text-white transition-colors hover:bg-white hover:text-black"
         >
           View My CV
         </Button>

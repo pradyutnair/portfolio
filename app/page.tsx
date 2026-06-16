@@ -3,32 +3,29 @@ import { ProjectsGrid } from "@/components/projects-grid"
 import { TechStack } from "@/components/tech-stack"
 import { ProfileSection } from "@/components/profile-section"
 import { ContactButton } from "@/components/contact-button"
-import { SocialLinks } from "@/components/social-links"
 import GitHubCommitHistory from "@/components/github-calendar"
 
 export default async function Portfolio() {
   const projects = await getAllProjects();
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="p-4 md:p-6">
-        <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
-          <ProfileSection />
-        </div>
+    <main className="min-h-screen bg-black text-white">
+      <div className="mx-auto max-w-4xl space-y-16 px-4 py-16 md:space-y-24 md:px-6 md:py-24">
+        <ProfileSection />
+
+        <section id="projects" style={{ contentVisibility: 'auto' }}>
+          <ProjectsGrid projects={projects} />
+        </section>
+
+        <TechStack />
+
+        <section style={{ containIntrinsicSize: '0 500px' }}>
+          <h2 className="eyebrow mb-6">GitHub</h2>
+          <GitHubCommitHistory usernames={['pradyutnair']} />
+        </section>
+
+        <ContactButton />
       </div>
-      <div style={{ contentVisibility: 'auto' }}>
-        <ProjectsGrid projects={projects} />
-      </div>
-      <div className="p-4 md:p-6">
-        <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
-          <TechStack />
-          <div className="py-4" style={{ containIntrinsicSize: '0 500px' }}>
-            <GitHubCommitHistory usernames={['pradyutnair']} />
-          </div>
-          <ContactButton />
-        </div>
-      </div>
-      {/* <SocialLinks /> */}
-    </div>
+    </main>
   )
 }

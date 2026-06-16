@@ -23,6 +23,7 @@ interface ProjectCardProps {
   liveUrl?: string;
   githubUrl?: string;
   isInternal?: boolean;
+  priority?: boolean;
 }
 
 const ProjectCard = memo(function ProjectCard({
@@ -34,6 +35,7 @@ const ProjectCard = memo(function ProjectCard({
   liveUrl,
   githubUrl,
   isInternal,
+  priority,
 }: ProjectCardProps) {
   const router = useRouter();
 
@@ -41,7 +43,7 @@ const ProjectCard = memo(function ProjectCard({
 
   return (
     <div
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-black hover:border-white transition-all cursor-pointer isolate h-full will-change-transform"
+      className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-white/10 transition-colors hover:border-white/40 isolate"
       role="link"
       tabIndex={0}
       aria-label={`${title} details`}
@@ -54,14 +56,15 @@ const ProjectCard = memo(function ProjectCard({
       }}
     >
       {/* Project Image */}
-      <div className="relative h-48 md:h-64 overflow-hidden bg-accent">
+      <div className="relative h-48 md:h-64 overflow-hidden bg-white/5">
         <Image
           src={imageSrc}
           alt={title || 'Project image'}
           className="object-cover transition-transform duration-300 group-hover:scale-105 will-change-transform"
           fill
-          loading="lazy"
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
+          sizes="(max-width: 768px) 85vw, (max-width: 1024px) 50vw, 33vw"
         />
       </div>
 
@@ -91,7 +94,7 @@ const ProjectCard = memo(function ProjectCard({
         {/* Actions */}
         <div className="flex gap-2 mt-auto flex-wrap" onClick={(e) => e.stopPropagation()}>
           {isInternal ? (
-            <div className="inline-flex items-center justify-center gap-1.5 rounded-md bg-gray-800 border border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-300 cursor-default">
+            <div className="inline-flex items-center justify-center gap-1.5 rounded-md border border-white/15 px-3 py-1.5 text-xs font-medium text-white/60 cursor-default">
               Internal Tool
             </div>
           ) : (
@@ -101,7 +104,7 @@ const ProjectCard = memo(function ProjectCard({
                   href={liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-md bg-white dark:bg-white px-3 py-1.5 text-xs font-medium text-black transition-colors hover:bg-gray-900 hover:text-white dark:hover:bg-black dark:hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-md bg-white px-3 py-1.5 text-xs font-medium text-black transition-colors hover:bg-white/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
                   <ExternalLink className="h-3 w-3" />
                   Live Demo
@@ -112,7 +115,7 @@ const ProjectCard = memo(function ProjectCard({
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex text-black items-center justify-center gap-1.5 rounded-md border border-input bg-background px-3 py-1.5 text-xs font-medium hover:bg-black hover:text-white hover:border-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-md border border-white/20 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:border-white/50 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
                   <Github className="h-3 w-3" />
                   View Code
@@ -128,37 +131,33 @@ const ProjectCard = memo(function ProjectCard({
 
 export function ProjectsGrid({ projects }: { projects: ProjectData[] }) {
   return (
-    <section id="projects" className="relative py-12 md:py-20">
-      <div className="px-4 md:px-6 mb-8 md:mb-12">
-        <div className="text-center">
-          <h2 className="text-xl md:text-2xl font-mono mb-4 text-center text-white">Projects</h2>
-        </div>
-      </div>
+    <div>
+      <h2 className="eyebrow mb-6">Projects</h2>
 
-      <div className="relative w-full px-4 md:px-16">
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-              skipSnaps: false,
-              dragFree: false,
-            }}
-            className="w-full"
-          >
+      <div className="relative px-10 md:px-14">
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+            skipSnaps: false,
+            dragFree: false,
+          }}
+          className="w-full"
+        >
           <CarouselContent className="-ml-4">
-            {projects.map((project) => (
+            {projects.map((project, i) => (
               <CarouselItem
                 key={project.id}
-                className="pl-4 basis-[85%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
               >
-                <ProjectCard {...project} />
+                <ProjectCard {...project} priority={i === 0} />
               </CarouselItem>
             ))}
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
-          </Carousel>
+        </Carousel>
       </div>
-    </section>
+    </div>
   );
 }

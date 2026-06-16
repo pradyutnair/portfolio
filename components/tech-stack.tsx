@@ -1,51 +1,49 @@
-"use client"
-
-import Marquee from "react-fast-marquee"
 import { FaPython, FaReact, FaGit } from "react-icons/fa"
 import { SiTypescript, SiPytorch, SiMysql, SiNextdotjs } from "react-icons/si"
 import { BsFillBarChartFill } from "react-icons/bs"
 import { VscAzure } from "react-icons/vsc"
-import { memo } from "react"
 
-const TechIcon = memo(function TechIcon({ Icon, name }: { Icon: any; name: string }) {
+const icons = [
+  { Icon: FaPython, name: "Python" },
+  { Icon: SiTypescript, name: "TypeScript" },
+  { Icon: SiPytorch, name: "PyTorch" },
+  { Icon: SiMysql, name: "MySQL" },
+  { Icon: SiNextdotjs, name: "Next.js" },
+  { Icon: FaReact, name: "React" },
+  { Icon: FaGit, name: "Git" },
+  { Icon: BsFillBarChartFill, name: "Analytics" },
+  { Icon: VscAzure, name: "Azure" },
+]
+
+function Track({ ariaHidden }: { ariaHidden?: boolean }) {
   return (
-    <div className="w-12 h-12 text-white flex justify-center items-center mx-4 will-change-transform">
-      <Icon size={40} />
+    <div className="flex shrink-0 items-center" aria-hidden={ariaHidden}>
+      {icons.map(({ Icon, name }) => (
+        <div
+          key={name}
+          title={name}
+          className="mx-6 flex h-12 w-12 items-center justify-center text-white/80"
+        >
+          <Icon size={38} />
+        </div>
+      ))}
     </div>
   )
-})
+}
 
-export const TechStack = memo(function TechStack() {
+export function TechStack() {
   return (
-    <section className="bg-black rounded-xl p-6 overflow-hidden relative">
-      <h2 className="text-2xl font-mono mb-4 text-center text-white">My Tech Stack</h2>
-      <div className="relative">
-        {/* Fade Effect Left */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black via-black to-transparent z-20 pointer-events-none" />
-        {/* Fade Effect Right */}
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black via-black to-transparent z-20 pointer-events-none" />
-        <Marquee
-          className="flex"
-          speed={20}
-          pauseOnHover={true}
-          gradient={false}
-          style={{ willChange: 'transform' }}
-        >
-          {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex" style={{ transform: 'translateZ(0)' }}>
-              <TechIcon Icon={FaPython} name="Python" />
-              <TechIcon Icon={SiTypescript} name="TypeScript" />
-              <TechIcon Icon={SiPytorch} name="PyTorch" />
-              <TechIcon Icon={SiMysql} name="MySQL" />
-              <TechIcon Icon={SiNextdotjs} name="Next.js" />
-              <TechIcon Icon={FaReact} name="React" />
-              <TechIcon Icon={FaGit} name="Git" />
-              <TechIcon Icon={BsFillBarChartFill} name="Analytics" />
-              <TechIcon Icon={VscAzure} name="Azure" />
-            </div>
-          ))}
-        </Marquee>
+    <section>
+      <h2 className="eyebrow mb-6">Tech Stack</h2>
+      <div className="group relative overflow-hidden">
+        {/* edge fade masks (functional, not decorative) */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-black to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-black to-transparent" />
+        <div className="flex w-max animate-marquee will-change-transform group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+          <Track />
+          <Track ariaHidden />
+        </div>
       </div>
     </section>
   )
-})
+}

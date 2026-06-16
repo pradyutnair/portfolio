@@ -7,7 +7,7 @@ technologies: ["Python", "PyTorch", "CLIP", "GeoCLIP", "FastAPI", "TypeScript", 
 githubUrl: "https://github.com/pradyutnair/geoguessr-cbm"
 ---
 
-GeoGuessr players instinctively know *why* they place a marker somewhere—they spot distinctive road markings, recognize architectural styles, or identify unique vegetation. But machine learning geolocation models operate as black boxes, making predictions without explaining their reasoning. Concept-Aware Geolocation bridges this gap by forcing all location predictions to flow through human-interpretable semantic concepts.
+GeoGuessr players instinctively know *why* they place a marker somewhere: they spot distinctive road markings, recognize architectural styles, or identify unique vegetation. But machine learning geolocation models operate as black boxes, making predictions without explaining their reasoning. Concept-Aware Geolocation bridges this gap by forcing all location predictions to flow through human-interpretable semantic concepts.
 
 ## The Motivation
 
@@ -19,23 +19,23 @@ I built a three-stage curriculum learning pipeline that combines the power of vi
 
 ### Stage 0: Domain Contrastive Pretraining
 
-The foundation starts with StreetCLIP and GeoCLIP—models that have learned powerful geographic representations from millions of images. But they're not optimized for the challenging GeoGuessr "meta" locations curated by the community. I developed a contrastive pretraining stage with a custom GPS adapter network (512d→768d) that aligns GeoCLIP's location embeddings with StreetCLIP's image features, creating a unified embedding space where visually similar locations cluster together.
+The foundation starts with StreetCLIP and GeoCLIP, models that have learned powerful geographic representations from millions of images. But they're not optimized for the challenging GeoGuessr "meta" locations curated by the community. I developed a contrastive pretraining stage with a custom GPS adapter network (512d→768d) that aligns GeoCLIP's location embeddings with StreetCLIP's image features, creating a unified embedding space where visually similar locations cluster together.
 
 ### Stage 1: Text-Anchored Concept Learning
 
 Rather than learning concept prototypes from scratch, I initialize them from CLIP text embeddings. This means the prototype for "Urban Street" starts close to CLIP's understanding of that phrase, then adapts through learnable residuals to capture street-view specific patterns. The model learns ~100 fine-grained child concepts (like "Highway," "Roundabout," "Unique car") that roll up into ~15 coarse parent concepts (like "Urban," "Rural," "Infrastructure").
 
-What's clever here is the hierarchical consistency loss—the model learns that if it predicts "Highway" (child), it should also predict "Infrastructure" (parent). This creates a structured semantic understanding that mirrors how humans reason about locations.
+What's clever here is the hierarchical consistency loss: the model learns that if it predicts "Highway" (child), it should also predict "Infrastructure" (parent). This creates a structured semantic understanding that mirrors how humans reason about locations.
 
 ### Stage 2: Gated Fusion for Geolocation
 
-The final stage predicts coordinates by combining concept embeddings with spatial image information. A cross-attention mechanism lets the concept embedding query image patches to extract relevant spatial context—essentially asking "which parts of the image support this concept prediction?"
+The final stage predicts coordinates by combining concept embeddings with spatial image information. A cross-attention mechanism lets the concept embedding query image patches to extract relevant spatial context, essentially asking "which parts of the image support this concept prediction?"
 
 The real innovation is the learned gate. Instead of naively concatenating features, the model learns per-dimension weights that balance concept vs. spatial information. Gate values near 1 mean "rely on concepts" (good for architecture, road markings), while values near 0 mean "rely on spatial patterns" (good for vegetation, lighting). Median gate value around 0.58 shows the model uses a balanced combination, with dimensional specialization revealing which geographic features depend on semantic understanding.
 
 ## The Data
 
-I trained on 43,040 street view images from learnablemeta.com—a treasure trove of challenging GeoGuessr locations. Each image has GPS coordinates, hierarchical concept labels, and country information. The model uses adaptive geocells generated through per-country K-means clustering, producing 1,048 cells that provide finer granularity in data-dense regions (Europe, South America, East Asia) while maintaining global coverage.
+I trained on 43,040 street view images from learnablemeta.com, a treasure trove of challenging GeoGuessr locations. Each image has GPS coordinates, hierarchical concept labels, and country information. The model uses adaptive geocells generated through per-country K-means clustering, producing 1,048 cells that provide finer granularity in data-dense regions (Europe, South America, East Asia) while maintaining global coverage.
 
 ## Results
 
@@ -127,7 +127,7 @@ Evaluated on the test split (4,304 samples), the finetuned variant with gated fu
 </div>
 
 **Key Findings:**
-- Concept-only predictions achieve 137.0 km versus 126.0 km for the full model—within 10%—validating that interpretability doesn't sacrifice much accuracy
+- Concept-only predictions achieve 137.0 km versus 126.0 km for the full model, within 10%, validating that interpretability doesn't sacrifice much accuracy
 - Image-only mode performs notably worse (154.0 km), indicating the concept bottleneck provides regularization benefits
 - The gated fusion achieves the best performance by adaptively combining concept and spatial information
 - Country-level accuracy exceeds 80% across all configurations
@@ -213,10 +213,10 @@ Evaluated on a publicly available GeoGuessr dataset containing 5,477 street view
 </tr>
 <tr>
 <td style={{padding: '0.5rem', fontStyle: 'italic', color: '#9ca3af'}}>GeoCLIP (baseline)</td>
-<td style={{padding: '0.5rem'}}>—</td>
+<td style={{padding: '0.5rem'}}>n/a</td>
 <td style={{padding: '0.5rem'}}>1015.8</td>
 <td style={{padding: '0.5rem'}}>3190.6</td>
-<td style={{padding: '0.5rem'}}>—</td>
+<td style={{padding: '0.5rem'}}>n/a</td>
 <td style={{padding: '0.5rem'}}>0.027</td>
 <td style={{padding: '0.5rem'}}>0.160</td>
 <td style={{padding: '0.5rem'}}>0.424</td>
@@ -274,7 +274,7 @@ The interpretability features reveal the model's reasoning process:
 
 - **Patch-level attention maps** show exactly which image regions support each prediction (vehicles, license plates, road geometry)
 - **Hierarchical concept predictions** give both specific ("Unique car," "License Plates") and coarse ("car_meta," "landscape_savannah") level insights
-- **Gate value analysis** reveals dimensional specialization—some dimensions are concept-dominated, others spatial-dominated
+- **Gate value analysis** reveals dimensional specialization: some dimensions are concept-dominated, others spatial-dominated
 
 For example, when identifying a West African location, the model attends to unique vehicles and license plates while predicting concepts like "Unique car" and "License Plates," with parent concepts indicating "car_meta" and "landscape_savannah" categories. The gate value of 0.431 shows balanced concept-spatial reasoning.
 

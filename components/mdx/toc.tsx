@@ -66,7 +66,7 @@ export function TableOfContents() {
     e.preventDefault()
     const element = document.getElementById(id)
     if (element) {
-      const yOffset = -100 // Adjust this value based on your header height
+      const yOffset = -120 // clears the 56px sticky site header
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
       window.scrollTo({ top: y, behavior: 'smooth' })
       setActiveId(id)
@@ -76,8 +76,8 @@ export function TableOfContents() {
   if (headings.length === 0) return null
 
   return (
-    <nav className="hidden lg:block sticky top-20 ml-8 space-y-4 max-w-[200px]">
-      <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">On this page</h4>
+    <nav className="hidden lg:block sticky top-24 ml-8 space-y-4 max-w-[200px]">
+      <h4 className="text-xs font-medium text-white/40 uppercase tracking-[0.2em]">On this page</h4>
       <ul className="space-y-2 text-sm">
         {headings.map(heading => (
           <li 
@@ -87,8 +87,8 @@ export function TableOfContents() {
             <a
               href={`#${heading.id}`}
               onClick={(e) => handleClick(e, heading.id)}
-              className={`block py-1 text-gray-500 hover:text-gray-100 transition-colors ${
-                activeId === heading.id ? 'text-blue-500 font-medium' : ''
+              className={`block py-1 text-white/40 hover:text-white transition-colors ${
+                activeId === heading.id ? 'text-white font-medium' : ''
               }`}
             >
               {heading.text}
